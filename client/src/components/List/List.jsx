@@ -15,7 +15,18 @@ import { ReactComponent as PlusMathIcon } from '../../assets/images/plus-math-ic
 import styles from './List.module.scss';
 
 const List = React.memo(
-  ({ id, index, name, isPersisted, cardIds, canEdit, onUpdate, onDelete, onCardCreate }) => {
+  ({
+    id,
+    index,
+    name,
+    isPersisted,
+    cardIds,
+    canEdit,
+    onUpdate,
+    onDelete,
+    onDeleteCards,
+    onCardCreate,
+  }) => {
     const [t] = useTranslation();
     const [isAddCardOpened, setIsAddCardOpened] = useState(false);
 
@@ -115,6 +126,7 @@ const List = React.memo(
                     onNameEdit={handleNameEdit}
                     onCardAdd={handleCardAdd}
                     onDelete={onDelete}
+                    onDeleteCards={onDeleteCards}
                   >
                     <Button className={classNames(styles.headerButton, styles.target)}>
                       <Icon fitted name="pencil" size="small" />
@@ -161,6 +173,7 @@ List.propTypes = {
   canEdit: PropTypes.bool.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onDeleteCards: PropTypes.func.isRequired,
   onCardCreate: PropTypes.func.isRequired,
 };
 

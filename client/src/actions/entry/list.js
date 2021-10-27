@@ -50,3 +50,17 @@ export const handleListDelete = (list) => ({
     list,
   },
 });
+
+export const deleteListCards = (id) => ({
+  type: EntryActionTypes.LIST_DELETE_CARDS,
+  payload: {
+    id,
+  },
+});
+
+export const handleListCardsDelete = (list) => ({
+  type: EntryActionTypes.LIST_DELETE_CARDS_HANDLE,
+  payload: {
+    list,
+  },
+});

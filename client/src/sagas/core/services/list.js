@@ -5,8 +5,10 @@ import { listByIdSelector, nextListPositionSelector, pathSelector } from '../../
 import {
   createList,
   deleteList,
+  deleteListCards,
   handleListCreate,
   handleListDelete,
+  handleListDeleteCards,
   handleListUpdate,
   updateList,
 } from '../../../actions';
@@ -93,4 +95,22 @@ export function* deleteListService(id) {
 
 export function* handleListDeleteService(label) {
   yield put(handleListDelete(label));
+}
+
+export function* deleteListCardsService(id) {
+  yield put(deleteListCards(id));
+
+  let list;
+  try {
+    ({ item: list } = yield call(request, api.deleteListCards, id));
+  } catch (error) {
+    yield put(deleteListCards.failure(id, error));
+    return;
+  }
+
+  yield put(deleteListCards.success(list));
+}
+
+export function* handleListCardsDeleteService(label) {
+  yield put(handleListDeleteCards(label));
 }

@@ -12,9 +12,10 @@ import styles from './ActionsPopup.module.scss';
 
 const StepTypes = {
   DELETE: 'DELETE',
+  DELETE_CARDS: 'DELETE_CARDS',
 };
 
-const ActionsStep = React.memo(({ onNameEdit, onCardAdd, onDelete, onClose }) => {
+const ActionsStep = React.memo(({ onNameEdit, onCardAdd, onDelete, onDeleteCards, onClose }) => {
   const [t] = useTranslation();
   const [step, openStep, handleBack] = useSteps();
 
@@ -32,6 +33,10 @@ const ActionsStep = React.memo(({ onNameEdit, onCardAdd, onDelete, onClose }) =>
     openStep(StepTypes.DELETE);
   }, [openStep]);
 
+  const handleDeleteCardsClick = useCallback(() => {
+    openStep(StepTypes.DELETE_CARDS);
+  }, [openStep]);
+
   if (step && step.type === StepTypes.DELETE) {
     return (
       <DeleteStep
@@ -41,6 +46,20 @@ const ActionsStep = React.memo(({ onNameEdit, onCardAdd, onDelete, onClose }) =>
         content={t('common.areYouSureYouWantToDeleteThisList')}
         buttonContent={t('action.deleteList')}
         onConfirm={onDelete}
+        onBack={handleBack}
+      />
+    );
+  }
+
+  if (step && step.type === StepTypes.DELETE_CARDS) {
+    return (
+      <DeleteStep
+        title={t('common.deleteListCards', {
+          context: 'title',
+        })}
+        content={t('common.areYouSureYouWantToDeleteThisListCards')}
+        buttonContent={t('action.deleteListCards')}
+        onConfirm={onDeleteCards}
         onBack={handleBack}
       />
     );
@@ -70,6 +89,11 @@ const ActionsStep = React.memo(({ onNameEdit, onCardAdd, onDelete, onClose }) =>
               context: 'title',
             })}
           </Menu.Item>
+          <Menu.Item className={styles.menuItem} onClick={handleDeleteCardsClick}>
+            {t('action.deleteListCards', {
+              context: 'title',
+            })}
+          </Menu.Item>
         </Menu>
       </Popup.Content>
     </>
@@ -80,6 +104,7 @@ ActionsStep.propTypes = {
   onNameEdit: PropTypes.func.isRequired,
   onCardAdd: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onDeleteCards: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

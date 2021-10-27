@@ -9,8 +9,11 @@ const updateList = (id, data, headers) => socket.patch(`/lists/${id}`, data, hea
 
 const deleteList = (id, headers) => socket.delete(`/lists/${id}`, undefined, headers);
 
+const deleteListCards = (id, headers) => socket.delete(`/lists/${id}/cards`, undefined, headers);
+
 export default {
   createList,
   updateList,
   deleteList,
+  deleteListCards,
 };

@@ -6,7 +6,7 @@ import {
   makeCardIdsByListIdSelector,
   makeListByIdSelector,
 } from '../selectors';
-import { createCard, deleteList, updateList } from '../actions/entry';
+import { createCard, deleteList, deleteListCards, updateList } from '../actions/entry';
 import List from '../components/List';
 
 const makeMapStateToProps = () => {
@@ -34,6 +34,7 @@ const mapDispatchToProps = (dispatch, { id }) =>
     {
       onUpdate: (data) => updateList(id, data),
       onDelete: () => deleteList(id),
+      onDeleteCards: () => deleteListCards(id),
       onCardCreate: (data) => createCard(id, data),
     },
     dispatch,

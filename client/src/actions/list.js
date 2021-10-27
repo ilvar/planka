@@ -88,3 +88,32 @@ export const handleListDelete = (list) => ({
     list,
   },
 });
+
+export const deleteListCards = (id) => ({
+  type: ActionTypes.LIST_DELETE_CARDS,
+  payload: {
+    id,
+  },
+});
+
+deleteListCards.success = (list) => ({
+  type: ActionTypes.LIST_DELETE_CARDS__SUCCESS,
+  payload: {
+    list,
+  },
+});
+
+deleteListCards.failure = (id, error) => ({
+  type: ActionTypes.LIST_DELETE_CARDS__FAILURE,
+  payload: {
+    id,
+    error,
+  },
+});
+
+export const handleListDeleteCards = (list) => ({
+  type: ActionTypes.LIST_DELETE_CARDS_HANDLE,
+  payload: {
+    list,
+  },
+});

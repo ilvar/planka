@@ -3,8 +3,10 @@ import { all, takeEvery } from 'redux-saga/effects';
 import {
   createListInCurrentBoardService,
   deleteListService,
+  deleteListCardsService,
   handleListCreateService,
   handleListDeleteService,
+  handleListCardsDeleteService,
   handleListUpdateService,
   moveListService,
   updateListService,
@@ -31,6 +33,12 @@ export default function* listWatchers() {
     takeEvery(EntryActionTypes.LIST_DELETE, ({ payload: { id } }) => deleteListService(id)),
     takeEvery(EntryActionTypes.LIST_DELETE_HANDLE, ({ payload: { list } }) =>
       handleListDeleteService(list),
+    ),
+    takeEvery(EntryActionTypes.LIST_DELETE_CARDS, ({ payload: { id } }) =>
+      deleteListCardsService(id),
+    ),
+    takeEvery(EntryActionTypes.LIST_DELETE_CARDS_HANDLE, ({ payload: { list } }) =>
+      handleListCardsDeleteService(list),
     ),
   ]);
 }
